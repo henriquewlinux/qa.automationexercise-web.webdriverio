@@ -204,8 +204,27 @@ export const config: WebdriverIO.Config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: async function () {
+        const puppeteer = await browser.getPuppeteer()
+        const page = (await puppeteer.pages())[0]
+
+        await page.setRequestInterception(true)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        page.on('request', (request: any) => {
+            const blockedDomains = [
+                'googlesyndication.com',
+                'doubleclick.net',
+                'googleads.g.doubleclick.net',
+                'adservice.google.com',
+                'amazon-adsystem.com',
+            ]
+            if (blockedDomains.some(domain => request.url().includes(domain))) {
+                request.abort()
+            } else {
+                request.continue()
+            }
+        })
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {string} commandName hook command name
