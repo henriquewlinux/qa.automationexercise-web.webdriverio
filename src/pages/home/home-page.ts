@@ -40,6 +40,7 @@ class HomePage {
                 await $(HomePageElements.contactUsButton).click()
                 break
             case 'delete':
+                await $(HomePageElements.deleteAccountButton).waitForDisplayed()
                 await $(HomePageElements.deleteAccountButton).click()
                 break
         }
