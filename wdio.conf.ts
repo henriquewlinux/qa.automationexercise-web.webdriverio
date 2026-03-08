@@ -62,6 +62,7 @@ export const config: WebdriverIO.Config = {
                 '--disable-notifications',
                 '--disable-infobars',
                 '--block-new-web-contents',
+                '--host-rules=MAP googlesyndication.com 0.0.0.0, MAP doubleclick.net 0.0.0.0, MAP googleads.g.doubleclick.net 0.0.0.0, MAP adservice.google.com 0.0.0.0, MAP amazon-adsystem.com 0.0.0.0, MAP s0.2mdn.net 0.0.0.0',
             ],
             excludeSwitches: ['enable-automation'],
             prefs: {
@@ -220,6 +221,7 @@ export const config: WebdriverIO.Config = {
                 'googleads.g.doubleclick.net',
                 'adservice.google.com',
                 'amazon-adsystem.com',
+                's0.2mdn.net7'
             ]
             if (blockedDomains.some(domain => request.url().includes(domain))) {
                 request.abort()
