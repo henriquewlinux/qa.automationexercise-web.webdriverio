@@ -56,6 +56,9 @@ export const config: WebdriverIO.Config = {
         'goog:chromeOptions': {
             args: [
                 '--headless',
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
                 '--disable-notifications',
                 '--disable-infobars',
                 '--block-new-web-contents',
